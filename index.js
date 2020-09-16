@@ -10,6 +10,11 @@ const Server = require('./Server')
 
 const messageHandler = require('./messageHandler')
 
+const express = require('express')
+const app = express()
+
+app.listen(process.env.PORT, () => console.log('[INFO] Express server running'))
+
 client.on('ready', async () => {
   await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -45,7 +50,7 @@ client.on('ready', async () => {
 client.on('message', async msg => {
   if (msg.author.bot)
     return
-    
+
   await messageHandler(msg)
 })
 
